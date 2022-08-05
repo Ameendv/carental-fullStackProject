@@ -112,6 +112,7 @@ function LoginForm() {
         `${SERVER_URL}/api/user-google-signin`,
         data
       );
+      console.log(res)
       if (res.status === 200) {
         navigate("/");
       }

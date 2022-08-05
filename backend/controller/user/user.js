@@ -12,13 +12,14 @@ module.exports = {
 
         try {
 
-            const response = await user.create(req.body)
+            const response = await User.create(req.body)
 
             console.log(response)
-
-        } catch (error) {
-            console.log(error)
-
+            res.sendStatus(200)
+     
+        } catch (error) { 
+            return res.sendStatus(409)
+ 
         }
 
     },
@@ -44,8 +45,9 @@ module.exports = {
                 const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "1d" })
 
                 const response = await User.updateOne({ email: email }, { $push: { refreshToken: refreshToken } })
-                console.log(response)
-                return res.status(200).send({ name, email, picture });
+                
+               
+                return res.status(200).json({ name, email, picture, accessToken,refreshToken});
             } else {
                 const res = await User.create({ name: name, email: email, profilePicture: picture, emailVerified: true })
                 const user = { username: email }
@@ -56,8 +58,8 @@ module.exports = {
 
                 const response = await User.updateOne({ email: email }, { $push: { refreshToken: refreshToken } })
                 console.log(response)
-
-                return res.status(200).send({ name, email, picture });
+                
+                return res.status(200).json({ name, email, picture, accessToken,refreshToken});
             }
         } catch (error) {
             res.sendStatus(500).json('Something happened,try again later')

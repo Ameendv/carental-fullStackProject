@@ -9,7 +9,9 @@ import { signupSchema } from "../../validations/signupValidation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Collapse from "@mui/material/Collapse";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+import OtpInput from './OtpModal'
+
 
 
 import CssBaseline from "@mui/material/CssBaseline";
@@ -34,8 +36,6 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 
-
-
 function SignupForm() {
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(signupSchema),
@@ -45,7 +45,7 @@ function SignupForm() {
     validateUser(data);
   };
 
-  console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID)
+  console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID);
 
   const [values, setValues] = useState({
     name: "",
@@ -58,8 +58,7 @@ function SignupForm() {
   });
 
   const [message, setMessage] = useState("");
-
-  const navigate=useNavigate()
+    const navigate = useNavigate();
 
   const validateUser = async (data) => {
     const isValid = await signupSchema.isValid(values);
@@ -70,7 +69,7 @@ function SignupForm() {
           console.log(res);
           if (res.status === 200) {
             setMessage("Registered Succesfully");
-            setOpen(true);
+            setOpenModal(true)
           }
         })
         .catch((err) => {
@@ -83,6 +82,10 @@ function SignupForm() {
   };
 
   const [open, setOpen] = useState(false);
+
+
+ const [openModal,setOpenModal]=useState(false)
+  const handleClose = () => setOpen(false);
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -112,8 +115,7 @@ function SignupForm() {
 
   gapi.load("client:auth2", () => {
     gapi.client.init({
-      clientId:
-        process.env.REACT_APP_GOOGLE_CLIENT_ID,
+      clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
       plugin_name: "chat",
     });
   });
@@ -122,17 +124,20 @@ function SignupForm() {
     console.log(result);
   };
 
-const handleLogin=async(googleData)=>{
+  const handleLogin = async (googleData) => {
+    const data = {
+      token: googleData.tokenId,
+    };
 
-  
-const data={
-  token:googleData.tokenId
-}
-
-const res=await axios.post(`${SERVER_URL}/api/user-google-signin`,data)
-console.log(res)
-
-}
+    const res = await axios.post(`${SERVER_URL}/api/user-google-signin`, data);
+    console.log(res);
+    if (res.status === 200) {
+      navigate("/");
+    } else {
+      setMessage("Try again later");
+      setOpen(true);
+    }
+  };
 
   return (
     <React.Fragment>
@@ -180,7 +185,7 @@ console.log(res)
                 <div></div>
               </Box>
               <Divider orientation="vertical" sx={{}} flexItem /> */}
-
+                {openModal && <OtpInput onAction={handleClose} /> }
               <Box
                 sx={{
                   "& > :not(style)": { m: 1, padding: "4px" },
@@ -386,10 +391,19 @@ console.log(res)
                   >
                     Signin with google
                   </Button> */}
-                 <Box >Already registered?</Box><Button size="small" onClick={()=>{navigate('/login')}}>Login</Button>
+                  <Box>Already registered?</Box>
+                  <Button
+                    size="small"
+                    onClick={() => {
+                      navigate("/login");
+                    }}
+                  >
+                    Login
+                  </Button>
                 </Box>
-                  
+
                 <Divider>OR</Divider>
+                
 
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
                   {/* <Button
