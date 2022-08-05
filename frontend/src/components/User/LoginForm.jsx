@@ -9,8 +9,7 @@ import { loginSchema } from "../../validations/loginValidation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Collapse from "@mui/material/Collapse";
-import {useNavigate} from 'react-router-dom'
-
+import { useNavigate } from "react-router-dom";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -33,96 +32,93 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 
-
 function LoginForm() {
+  const { register, handleSubmit, formState } = useForm({
+    resolver: yupResolver(loginSchema),
+  });
 
-    const { register, handleSubmit, formState } = useForm({
-        resolver: yupResolver(loginSchema),
-      });
-    
-      const onSubmit = (data) => {
-        console.log('hai')
-        validateUser(data);
-      };
-    console.log(formState)
-    
-    
-      const [values, setValues] = useState({
-        
-        password: "",
-        
-        email: "",
-       
-        showPassword: false,
-        
-      });
-    
-      const [message, setMessage] = useState("");
-    
-      const navigate=useNavigate()
-    
-      const validateUser = async (data) => {
-        const isValid = await loginSchema.isValid(values);
-        if (isValid) {
-          await axios
-            .post(`${SERVER_URL}/api/user-login`, data)
-            .then((res) => {
-              console.log(res);
-              if (res.status === 200) {
-                navigate('/')
-              }
-            })
-            .catch((err) => {
-              if (err.response.status === 409) {
-                setMessage("Already registered");
-                setOpen(true);
-              }
-            });
-        }
-      };
-    
-      const [open, setOpen] = useState(false);
-    
-      const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-      };
-    
-      const handleClickShowPassword = () => {
-        setValues({
-          ...values,
-          showPassword: !values.showPassword,
+  const onSubmit = (data) => {
+    console.log("hai");
+    validateUser(data);
+  };
+
+  const [values, setValues] = useState({
+    password: "",
+
+    email: "",
+
+    showPassword: false,
+  });
+
+  const [message, setMessage] = useState("");
+
+  const navigate = useNavigate();
+
+  const validateUser = async (data) => {
+    const isValid = await loginSchema.isValid(values);
+    if (isValid) {
+      await axios
+        .post(`${SERVER_URL}/api/user-login`, data)
+        .then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            navigate("/");
+          }
+        })
+        .catch((err) => {
+          if (err.response.status === 409) {
+            setMessage("Already registered");
+            setOpen(true);
+          }
         });
-      };
-    
-      const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-      };
-    
-     
-    
-      gapi.load("client:auth2", () => {
-        gapi.client.init({
-          clientId:
-            process.env.REACT_APP_GOOGLE_CLIENT_ID,
-          plugin_name: "chat",
-        });
-      });
-    
-      const handleFailure = (result) => {
-        console.log(result);
-      };
-    
-    const handleLogin=async(googleData)=>{
-    
-      
-    const data={
-      token:googleData.tokenId
     }
-    
-    const res=await axios.post(`${SERVER_URL}/user-google-signin`,data)
-    console.log(res)
-    
+  };
+
+  const [open, setOpen] = useState(false);
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  gapi.load("client:auth2", () => {
+    gapi.client.init({
+      clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+      plugin_name: "chat",
+    });
+  });
+
+  const handleFailure = (result) => {
+    console.log(result);
+  };
+
+  const handleLogin = async (googleData) => {
+    const data = {
+      token: googleData.tokenId,
+    };
+
+    try {
+      const res = await axios.post(
+        `${SERVER_URL}/api/user-google-signin`,
+        data
+      );
+      if (res.status === 200) {
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
     }
+  };
 
   return (
     <React.Fragment>
@@ -135,8 +131,8 @@ function LoginForm() {
             display: "flex",
             justifyContent: "center",
             alignContent: "center",
-            paddingTop:'8rem',
-            paddingBottom:'8rem'
+            paddingTop: "8rem",
+            paddingBottom: "8rem",
           }}
         >
           <Container fixed>
@@ -200,9 +196,6 @@ function LoginForm() {
                 </Collapse>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  
-
-                  
                   <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                     <AlternateEmailIcon
                       sx={{ color: "action.active", mr: 1, my: 0.5, mt: 3 }}
@@ -267,7 +260,7 @@ function LoginForm() {
                       />
                     </FormControl>
                   </Box>
-                  
+
                   <Box sx={{ display: "flex", justifyContent: "center" }}>
                     <Button
                       sx={{
@@ -285,18 +278,30 @@ function LoginForm() {
                   </Box>
                 </form>
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
-                 
-                 <Button size="small" onClick={()=>{navigate('/signup')}}>Forgot password</Button>
+                  <Button
+                    size="small"
+                    onClick={() => {
+                      navigate("/signup");
+                    }}
+                  >
+                    Forgot password
+                  </Button>
                 </Box>
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
-                 
-                 <Box >New here?</Box><Button size="small" onClick={()=>{navigate('/signup')}}>Register</Button>
+                  <Box>New here?</Box>
+                  <Button
+                    size="small"
+                    onClick={() => {
+                      navigate("/signup");
+                    }}
+                  >
+                    Register
+                  </Button>
                 </Box>
-                  
+
                 <Divider>OR</Divider>
 
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
-                 
                   <GoogleLogin
                     clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                     buttontext="Signup with Google"
@@ -311,7 +316,7 @@ function LoginForm() {
         </Box>
       </Container>
     </React.Fragment>
-  )
+  );
 }
 
-export default LoginForm
+export default LoginForm;

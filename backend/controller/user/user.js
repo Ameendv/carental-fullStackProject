@@ -23,6 +23,8 @@ module.exports = {
 
     },
     googleSignin: async (req, res) => {
+
+        console.log('heyyyya')
         const { token } = req.body
         const ticket = await client.verifyIdToken({
             idToken: token,
@@ -32,16 +34,36 @@ module.exports = {
         const { name, email, picture } = ticket.getPayload()
 
         try {
-            const user=await User.findOne({email:email})
+            const user = await User.findOne({ email: email })
 
-            if(user){
-                
+            if (user) {
+                const user = { username: email }
+
+                const accessToken = generateAccessToken(user)
+
+                const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "1d" })
+
+                const response = await User.updateOne({ email: email }, { $push: { refreshToken: refreshToken } })
+                console.log(response)
+                return res.status(200).send({ name, email, picture });
+            } else {
+                const res = await User.create({ name: name, email: email, profilePicture: picture, emailVerified: true })
+                const user = { username: email }
+
+                const accessToken = generateAccessToken(user)
+
+                const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "1d" })
+
+                const response = await User.updateOne({ email: email }, { $push: { refreshToken: refreshToken } })
+                console.log(response)
+
+                return res.status(200).send({ name, email, picture });
             }
         } catch (error) {
-            
+            res.sendStatus(500).json('Something happened,try again later')
         }
 
-        return res.status(201).send({ name, email, picture });
+
 
     },
     userSignin: async (req, res) => {
