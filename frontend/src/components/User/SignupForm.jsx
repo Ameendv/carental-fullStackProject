@@ -10,10 +10,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Collapse from "@mui/material/Collapse";
 import { useNavigate } from "react-router-dom";
-import OtpInput from './OtpModal'
+import OtpInput from "./OtpModal";
 
-
-
+import MuiPhoneNumber from "material-ui-phone-number";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -58,7 +57,7 @@ function SignupForm() {
   });
 
   const [message, setMessage] = useState("");
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const validateUser = async (data) => {
     const isValid = await signupSchema.isValid(values);
@@ -68,8 +67,9 @@ function SignupForm() {
         .then((res) => {
           console.log(res);
           if (res.status === 200) {
-            setMessage("Registered Succesfully");
-            setOpenModal(true)
+            setEmail(res.data.email);
+            setNumber(res.data.number);
+            setOpenModal(true);
           }
         })
         .catch((err) => {
@@ -83,8 +83,10 @@ function SignupForm() {
 
   const [open, setOpen] = useState(false);
 
-
- const [openModal,setOpenModal]=useState(false)
+  //modal for otp
+  const [email, setEmail] = useState("");
+  const [number, setNumber] = useState("");
+  const [openModal, setOpenModal] = useState(false);
   const handleClose = () => setOpen(false);
 
   const handleChange = (prop) => (event) => {
@@ -125,15 +127,23 @@ function SignupForm() {
   };
 
   const handleLogin = async (googleData) => {
-    const data = {
-      token: googleData.tokenId,
-    };
+    try {
+      const data = {
+        token: googleData.tokenId,
+      };
 
-    const res = await axios.post(`${SERVER_URL}/api/user-google-signin`, data);
-    console.log(res);
-    if (res.status === 200) {
-      navigate("/");
-    } else {
+      const res = await axios.post(
+        `${SERVER_URL}/api/user-google-signin`,
+        data
+      );
+      console.log(res);
+      if (res.status === 200) {
+        navigate("/");
+      } else {
+        setMessage("Try again later");
+        setOpen(true);
+      }
+    } catch (error) {
       setMessage("Try again later");
       setOpen(true);
     }
@@ -172,20 +182,13 @@ function SignupForm() {
                 padding: "10px",
               }}
             >
-              {/* <Box
-                sx={{
-                  backgroundImage: `url(${Image})`,
-                  width: "21.5rem",
-                  margin: " 0rem -9rem 0rem -5rem",
-                  backgroundSize: "cover",
-                  height: "100%",
-                  borderRadius: " 13px 0 1px 13px",
-                }}
-              >
-                <div></div>
-              </Box>
-              <Divider orientation="vertical" sx={{}} flexItem /> */}
-                {openModal && <OtpInput onAction={handleClose} /> }
+              {openModal && (
+                <OtpInput
+                  onAction={handleClose}
+                  email={email}
+                  number={number}
+                />
+              )}
               <Box
                 sx={{
                   "& > :not(style)": { m: 1, padding: "4px" },
@@ -255,6 +258,18 @@ function SignupForm() {
                         formState.errors.number["message"]
                       }
                     />
+                    {/* <MuiPhoneNumber id="input-with-sx2"
+                      label="Mobile Number"
+                      variant="outlined"
+                      size="small"
+                      value={values.number}
+                      {...register("number")}
+                      onChange={handleChange("number")}
+                      name="number"
+                      error={Boolean(formState.errors.number)}
+                      helperText={
+                        formState.errors.number &&
+                        formState.errors.number["message"]} defaultCountry={'us'} onlyCountries={['in','us']} />  */}
                   </Box>
                   <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                     <AlternateEmailIcon
@@ -403,7 +418,6 @@ function SignupForm() {
                 </Box>
 
                 <Divider>OR</Divider>
-                
 
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
                   {/* <Button

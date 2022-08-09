@@ -66,8 +66,8 @@ function LoginForm() {
           }
         })
         .catch((err) => {
-          if (err.response.status === 409) {
-            setMessage("Already registered");
+          if (err.response.status === 404) {
+            setMessage("Invalid credentials");
             setOpen(true);
           }
         });
@@ -112,12 +112,14 @@ function LoginForm() {
         `${SERVER_URL}/api/user-google-signin`,
         data
       );
-      console.log(res)
+      console.log(res);
       if (res.status === 200) {
         navigate("/");
       }
     } catch (error) {
       console.log(error);
+      setMessage("Try again later");
+      setOpen(true);
     }
   };
 
