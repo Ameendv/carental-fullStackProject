@@ -1,0 +1,27 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200&display=swap');
+
+.font{
+    margin-top:'3px';
+    color:#757575;
+   
+    font-size:10px;
+    margin-left:3px;
+    text-align: center;
+    
+}
+
+.iconAndTitle{
+    border:'1px solid grey';
+    border-radius:5px;
+    background-color:'#c5c5c54f';
+    height:66px
+    
+    
+}
+
+.check::-webkit-scrollbar{
+    display:none
+}
+

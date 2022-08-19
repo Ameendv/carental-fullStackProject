@@ -1,10 +1,11 @@
 import React from "react";
 import DefaultLayout from "../components/DefaultLayout";
+import HomeSearch from "../components/User/HomeSearch";
 
 function Home() {
   return (
     <DefaultLayout>
-      <h1>Home page</h1>
+      <HomeSearch />
     </DefaultLayout>
   );
 }

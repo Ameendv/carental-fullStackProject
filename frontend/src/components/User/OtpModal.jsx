@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { SERVER_URL } from "../../constants/api";
+import {useNavigate} from "react-router-dom"
 
 function OtpModal(props) {
   const [openModal, setOpenModal] = useState(true);
@@ -30,12 +31,17 @@ function OtpModal(props) {
 
       if (response.status === 200) {
         handleCloseModal();
-        console.log("number verfied");
+        navigate('/')
+
+      }else{
+        alert('number not verified');
+        navigate('/')
       }
     } catch (error) {}
   };
 
   const [OTP, setOTP] = useState("");
+  const navigate=useNavigate();
 
   return (
     <>

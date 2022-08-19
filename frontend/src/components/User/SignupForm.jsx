@@ -74,7 +74,8 @@ function SignupForm() {
         })
         .catch((err) => {
           if (err.response.status === 409) {
-            setMessage("Already registered");
+            console.log(err.response.data)
+            setMessage(err.response.data);
             setOpen(true);
           }
         });

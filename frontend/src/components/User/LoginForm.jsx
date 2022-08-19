@@ -32,7 +32,20 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 
+import {useSelector,useDispatch} from 'react-redux'
+import {logged} from '../../redux/reducers/userLoggedSlice'
+
 function LoginForm() {
+
+  const userLogged=useSelector((state)=>state.logged)
+
+
+   console.log(userLogged)
+
+   const dispatch=useDispatch()
+   
+ 
+
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(loginSchema),
   });
@@ -114,7 +127,10 @@ function LoginForm() {
       );
       console.log(res);
       if (res.status === 200) {
+        dispatch(logged());
         navigate("/");
+      }else{
+        console.log(res)
       }
     } catch (error) {
       console.log(error);

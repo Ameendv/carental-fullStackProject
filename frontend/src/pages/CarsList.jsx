@@ -1,10 +1,18 @@
 import React from "react";
 import DefaultLayout from "../components/DefaultLayout";
+import SortSection from "../components/User/SortSection";
+import FilterSection from "../components/User/FilterSection";
+import Cards from '../components/User/CarCards'
+
 
 function CarsList() {
   return (
-    <DefaultLayout>
-      <h1>CarsList</h1>
+    <DefaultLayout >
+     <SortSection />
+     <FilterSection />
+     <Cards/>
+    
+
     </DefaultLayout>
   );
 }

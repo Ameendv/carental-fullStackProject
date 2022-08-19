@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 
 const app = express.Router();
 const bcrypt = require("bcrypt");
@@ -19,6 +19,11 @@ clientTwilio.verify.v2.services
 
 module.exports = {
   userSignup: async (req, res) => {
+
+    const userExist=await User.findOne({number:req.body.number})
+    if(userExist) return res.status(409).json("Number already registered ")
+    
+
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     req.body.password = hashedPassword;
     req.body.confirmPassword = null;
@@ -40,10 +45,11 @@ module.exports = {
           return res.sendStatus(500);
         });
     } catch (error) {
-      return res.sendStatus(409);
+      return res.status(409).json('Email already registered');
     }
   },
   googleSignin: async (req, res) => {
+   
     try {
       const { token } = req.body;
       const ticket = await client.verifyIdToken({
@@ -69,10 +75,11 @@ module.exports = {
           { email },
           { $push: { refreshToken } }
         );
-
-        return res
-          .status(200)
-          .json({
+        res.cookie('jwt', refreshToken, {
+          httpOnly: true,
+          maxAge: 24 * 60 * 60 * 1000
+      })
+        return res.status(200).json({
             name,
             email,
             picture,
@@ -81,7 +88,7 @@ module.exports = {
           })
           .send();
       }
-        const res = await User.create({
+        const addUserData = await User.create({
           name,
           email,
           profilePicture: picture,
@@ -110,8 +117,8 @@ module.exports = {
       
     } catch (error) {
       console.log(error);
-      return res.sendStatus(500);
-    }
+       res.status(500).json();
+    } 
   },
   userSignin: async (req, res) => {
     try {
@@ -134,6 +141,12 @@ module.exports = {
           { $push: { refreshToken } }
         );
         console.log(response);
+
+        res.cookie('jwt', refreshToken, {
+          httpOnly: true,
+          maxAge:60000
+          // 24 * 60 * 60 * 1000
+        })
 
         res.json({ accessToken, refreshToken });
       } else {
@@ -171,5 +184,5 @@ module.exports = {
 };
 
 function generateAccessToken(user) {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "10m" });
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {algorithm:'HS256', expiresIn: "10m" });
 }

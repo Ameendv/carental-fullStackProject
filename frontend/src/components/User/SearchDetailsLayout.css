@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200&family=Rubik:wght@300&display=swap');
+
+.searchSection{
+    background-color: yellow;
+}
+
+.detailsFont{
+    font-family: 'Rubik', sans-serif;
+    font-size:13px;
+    font-weight: bold;
+
+}

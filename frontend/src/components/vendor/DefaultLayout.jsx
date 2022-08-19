@@ -11,20 +11,12 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import NavbarMenu from './User/NavbarMenu'
-import NavMenuLogged from './User/NavMenuLogged'
-import {useSelector} from 'react-redux'
-import './DefaultLayoutStyle.css'
 
 
 const pages = ["Home", "Offers", "Contact us"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function DefaultLayout(props) {
-
-  const userLogged=useSelector((state)=>{ return state.logged})
-  console.log(userLogged,'in here')
-  
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -64,7 +56,7 @@ function DefaultLayout(props) {
                 textDecoration: "none",
               }}
             >
-              caRent
+              Carent
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -97,8 +89,8 @@ function DefaultLayout(props) {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page} className="page" onClick={handleCloseNavMenu}>
-                    <Typography  textAlign="center" >{page}</Typography>
+                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
@@ -153,16 +145,14 @@ function DefaultLayout(props) {
                   vertical: "top",
                   horizontal: "right",
                 }}
-
-
-
-
-                
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {userLogged?<NavMenuLogged />:<NavbarMenu />}
-                
+                {settings.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ))}
               </Menu>
             </Box>
           </Toolbar>
