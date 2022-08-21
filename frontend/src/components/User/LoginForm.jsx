@@ -127,6 +127,7 @@ function LoginForm() {
       );
       console.log(res);
       if (res.status === 200) {
+        console.log(res.cookie)
         dispatch(logged());
         navigate("/");
       }else{

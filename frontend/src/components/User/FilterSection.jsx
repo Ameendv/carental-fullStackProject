@@ -1,7 +1,7 @@
 import React from 'react'
-import { styled } from '@mui/material/styles';
+
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
+
 import Box from '@mui/material/Box';
 import SedanIcon from '../../assets/sedan icon.svg'
 import ManualIcon from '../../assets/gear-stick-manual.svg'
@@ -11,13 +11,13 @@ import './Filtersection.css'
 
 
 
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
+// const Item = styled(Paper)(({ theme }) => ({
+//     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+//     ...theme.typography.body2,
+//     padding: theme.spacing(1),
+//     textAlign: 'center',
+//     color: theme.palette.text.secondary,
+//   }));
 
 const iconGridStyle={
   display:'flex',justifyContent:'around',alignItems:'center'
@@ -35,7 +35,7 @@ const iconImageStyle={
 
 function FilterSection() {
   return (
-    <Box sx={{ width: '100%',marginTop:'5px' ,backgroundColor:'#c5c5c54f' }}>
+    <Box sx={{ width: '100%',marginTop:'5px' ,backgroundColor:'#c5c5c54f',padding:'5px' }}>
     <Grid  container rowSpacing={1} columnSpacing={{ xs:1, sm:2, md:3 }} sx={iconGridStyle}>
     <Chip md={1} xs={2} sm={3} label="Type : " size='medium' variant="outlined" sx={{color:'#5e5e5e',marginTop:'5px',marginLeft:'20px'}} />
       <Grid item xs={3} md={2} sm={3} sx={iconGridStyle} >

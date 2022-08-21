@@ -12,7 +12,7 @@ import Collapse from "@mui/material/Collapse";
 import { useNavigate } from "react-router-dom";
 import OtpInput from "./OtpModal";
 
-import MuiPhoneNumber from "material-ui-phone-number";
+
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";

@@ -18,7 +18,7 @@ import './DefaultLayoutStyle.css'
 
 
 const pages = ["Home", "Offers", "Contact us"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+
 
 function DefaultLayout(props) {
 
@@ -60,12 +60,13 @@ function DefaultLayout(props) {
                 fontFamily: "monospace",
                 fontWeight: 700,
                 letterSpacing: ".1rem",
-                color: "#D61C4E",
+                
                 textDecoration: "none",
               }}
             >
-              caRent
+              <span className='title' style={{color:'#D61C4E',}}>CAR</span><span className='title' style={{color:'#fff',marginLeft:'4px'}}>ENT</span>
             </Typography>
+            
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
@@ -169,7 +170,7 @@ function DefaultLayout(props) {
         </Container>
       </AppBar>
 
-      <div className="content">{props.children}</div>
+      <div className="content1">{props.children}</div>
     </div>
   );
 }

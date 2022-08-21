@@ -25,7 +25,7 @@ function App() {
 
         </Routes>
         <Routes>
-          <Route path="/vendor" exact element={<Home />} />
+         
           <Route path="/vendor-login" exact element={<VendorLogin />} />
           <Route path="/dashboard" exact element={<Dashboard />} />
         </Routes>

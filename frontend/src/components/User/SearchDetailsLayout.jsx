@@ -106,7 +106,7 @@ function SearchDetailsLayout(props) {
                   <Box sx={locationHead}>Pickup Time</Box>
                   <Stack direction="row" spacing={1}>
                     <Box sx={{fontWeight:'bold',fontSize:'30px'}}>26</Box>
-                    <Divider orientation="vertical" sx={{backgroundColor:'black',}} light={false} flexItem />
+                   
                     <Box className="detailsFont">July,22<br/>10.00 Am</Box>
                    
                   </Stack>
@@ -118,7 +118,7 @@ function SearchDetailsLayout(props) {
                   <Box sx={locationHead}>Dropoff Time</Box>
                   <Stack direction="row" spacing={1}>
                     <Box sx={{fontWeight:'bold',fontSize:'30px'}}>29</Box>
-                    <Divider orientation="vertical" sx={{backgroundColor:'black',}}  sx={{backgroundColor:'black',}}flexItem />
+                   
                     <Box className="detailsFont">July,22<br/>10.00 Am</Box>
                    
                   </Stack>
@@ -129,7 +129,7 @@ function SearchDetailsLayout(props) {
           <Box sx={{height:'80px',backgroundColor:'#F87474',borderRadius:'5px',display:'flex',alignContent:'center',padding:'15px'}}>
             
               <AccessTimeIcon sx={{width:'45px',height:'45px'}}/>
-              <Divider orientation="vertical" sx={{backgroundColor:'black',margin:'10px'}} sx={{backgroundColor:'black',}}flexItem />
+              <Divider orientation="vertical" sx={{backgroundColor:'black',margin:'10px'}}flexItem />
             
             <Box SX={{marginLeft:'10px'}}>
               <h6 style={{color:'white',fontSize:'15px'}}>

@@ -1,13 +1,18 @@
 import React from "react";
-import DefaultLayout from "../../components/vendor/DefaultLayout";
+import SideNavbar from '../../components/vendor/Navbar/SideNavbar/SideNavbar'
+import Content from '../../components/vendor/Navbar/Content/Index'
+
+
+
+
 
 function Dashboard() {
   return (
-    <div>
-      <DefaultLayout>
-        <h1>dashboard</h1>
-      </DefaultLayout>
-    </div>
+    <>
+     <SideNavbar >
+    <Content />
+      </ SideNavbar>
+      </>
   );
 }
 

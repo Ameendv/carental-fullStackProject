@@ -1,0 +1,26 @@
+.header-parent{
+  display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.header {
+    width: 75%;
+    background: #fff;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  
+  @media (max-width: 768px) {
+    .title {
+      
+      display: flex;
+    align-items: center;
+    justify-content: flex-end;
+      
+    }
+  }
+  

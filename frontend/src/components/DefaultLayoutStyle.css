@@ -1,3 +1,10 @@
-.page{
-color: "blue" !important;
+
+
+@import url('https://fonts.googleapis.com/css2?family=Asap&family=Noto+Sans:wght@200&family=Rubik:wght@300&family=Secular+One&display=swap');
+.title{
+    font-family: 'Asap', sans-serif;
+/* font-family: 'Noto Sans', sans-serif;
+font-family: 'Rubik', sans-serif; */
+font-family: 'Secular One', sans-serif;
+letter-spacing:'4px'
 }

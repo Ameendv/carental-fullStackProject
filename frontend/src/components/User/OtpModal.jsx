@@ -31,11 +31,11 @@ function OtpModal(props) {
 
       if (response.status === 200) {
         handleCloseModal();
-        navigate('/')
+        navigate('/login')
 
       }else{
         alert('number not verified');
-        navigate('/')
+        navigate('/login')
       }
     } catch (error) {}
   };

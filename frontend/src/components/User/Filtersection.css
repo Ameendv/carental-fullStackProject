@@ -16,12 +16,20 @@
     border:'1px solid grey';
     border-radius:5px;
     background-color:'#c5c5c54f';
-    height:66px
-    
-    
+    height:66px;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    transition: all 200ms;
+}
+
+.iconAndTitle:hover{
+
+    background-color: #ffffff;
+transform: scale(1.05);
 }
 
 .check::-webkit-scrollbar{
     display:none
 }
+
+
 
