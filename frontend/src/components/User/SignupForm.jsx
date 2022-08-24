@@ -60,7 +60,7 @@ function SignupForm() {
   const navigate = useNavigate();
 
   const validateUser = async (data) => {
-    const isValid = await signupSchema.isValid(values);
+    const isValid = await signupSchema.isValid(values)
     if (isValid) {
       await axios
         .post(`${SERVER_URL}/api/user-signup`, data)

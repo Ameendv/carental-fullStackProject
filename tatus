@@ -1,0 +1,35 @@
+[33mcommit e1156c579c2ad3b493dc58eb61b7f4be9dec5a00[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Ameen <ameendv00@gmail.com>
+Date:   Sun Aug 21 23:37:52 2022 +0530
+
+    do vendor navbar
+
+[33mcommit 0b34da31083ba8f1a45d9a04e38bcfcfd319b54c[m
+Author: Ameen <ameendv00@gmail.com>
+Date:   Fri Aug 19 09:06:41 2022 +0530
+
+    Home page search bar,cars listing cards design,filter ans sort section
+
+[33mcommit 6b4d7953606032b3de4027a44b2447044463ffdf[m
+Author: Ameen <ameendv00@gmail.com>
+Date:   Tue Aug 9 10:06:47 2022 +0530
+
+    Otp verification add-googleSignin
+
+[33mcommit 859d9da796de2c5fb9ff37f6381caee73a2eaaa5[m
+Author: Ameen <ameendv00@gmail.com>
+Date:   Fri Aug 5 21:27:10 2022 +0530
+
+    Otp input add
+
+[33mcommit 580406f8322e1e64f7e046bcf552e19259970885[m
+Author: Ameen <ameendv00@gmail.com>
+Date:   Fri Aug 5 17:23:39 2022 +0530
+
+    Google signin into home page
+
+[33mcommit 73e082899f610104f50f601fee32b6001f18334c[m
+Author: Ameen <ameendv00@gmail.com>
+Date:   Fri Aug 5 16:51:50 2022 +0530
+
+    Initial commit
