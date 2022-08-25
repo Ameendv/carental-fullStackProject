@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import CarsList from "./pages/CarsList";
 import VendorLogin from "./pages/vendor/Login";
 import Dashboard from "./pages/vendor/Dashboard";
+import Register from './pages/vendor/Register'
 
 import Usage from "./pages/Usage";
 
@@ -25,7 +26,7 @@ function App() {
 
         </Routes>
         <Routes>
-         
+        <Route path="/vendor-register" exact element={<Register />} />
           <Route path="/vendor-login" exact element={<VendorLogin />} />
           <Route path="/dashboard" exact element={<Dashboard />} />
         </Routes>

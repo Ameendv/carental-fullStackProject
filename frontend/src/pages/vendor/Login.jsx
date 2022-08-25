@@ -1,4 +1,5 @@
 import React from 'react'
+import Form from '../../components/vendor/login/Index'
 
 
 
@@ -6,7 +7,7 @@ function Login() {
   return (
     <div>
      
-    <h1>vendor login</h1>
+    <Form />
       
     </div>
   )
