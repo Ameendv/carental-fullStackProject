@@ -1,9 +1,128 @@
-.Dashboard {
-    font-family: sans-serif;
-    text-align: center;
-  }
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a{
+  text-decoration: none;
+}
+ul{
+  list-style: none;
+}
+main{
+  position: relative;
+  margin:3rem 0 0 0;
+  padding: 0 1rem;
+  font-size: 1rem;
+  font-family: 'Nunito Sans',sans-serif;
+  transition: 0.5s;
+  z-index:1000;
+}
+.header{
+  position: fixed;
+  top:0;
+  left: 0;
+  height: 3rem;
+  width: 100%;
+  display: flex;
+  justify-content:space-between ;
+  align-items: center;
+  background-color: var(#2c155d);
+  padding: 0 1rem;
+  transition: 0.5s;
+}
+.header-toggle{
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: var(#2c155d);
+}
+.sidebar{
+  position: fixed;
+  top: 0;
+  left: -30%;
+  height: 100vh;
+  width: 68px;
+  background-color: var(#2c155d);
+  padding-top: 1rem;
+  transition: 0.5s;
   
-  body,
-  html {
-    margin: 0;
+}
+.nav{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  
+  height: 100%;
+}
+.nav-logo,
+.nav-link{
+  display: grid;
+  grid-template-columns: max-content max-content;
+  column-gap: 2rem;
+  padding: 0.5rem 0 0.5rem 1.5rem;
+}
+.nav-logo{
+  margin-bottom: 2rem;
+}
+.nav-logo-icon{
+  font-size: 1.25rem;
+  color: var(#2c155d);
+  cursor: pointer;
+}
+.nav-logo-name{
+  font-weight:700;
+  color: var(#2c155d);
+}
+.nav-link{
+  position: relative;
+  color: var(#2c155d);
+  transition: .5s;
+  margin-bottom: 1.5rem;
+}
+.nav-link:hover{
+  color: var(#2c155d);
+  background-color: rgba(169, 153, 153, 0.548);
+}
+.active{
+  color: var(#2c155d);
+  background-color: rgba(227, 203, 203, 0.635);
+}
+.active::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 38px;
+  width: 3px;
+  background-color: var(#2c155d);
+  transition: 0.5s;
+}
+.show{
+  left: 0;
+}
+.space-toggle{
+  padding-left: calc(68px + 1rem);
+}
+
+@media screen and (min-width:768px){
+  main{
+      margin: calc(3rem + 1rem) 0 0 0;
+      padding: 0 1rem 0 calc(68px + 2rem);
   }
+  .header{
+      height: calc(3rem + 1rem);
+      padding-left: calc(68px + 2rem);
+  }
+  .sidebar{
+      left: 0;
+      padding: 1rem 0 0 0;
+  }
+  .show{
+      width: calc(3rem + 156px);
+  }
+  .space-toggle{
+      padding-left: calc(68px + 10rem);
+  }
+}

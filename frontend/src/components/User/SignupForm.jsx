@@ -62,6 +62,7 @@ function SignupForm() {
   const validateUser = async (data) => {
     const isValid = await signupSchema.isValid(values)
     if (isValid) {
+      console.log(data)
       await axios
         .post(`${SERVER_URL}/api/user-signup`, data)
         .then((res) => {

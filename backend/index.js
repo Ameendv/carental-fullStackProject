@@ -17,13 +17,27 @@ mongoose
     }
   });
 
-app.use(cors({credentials:true}));
+app.use(cors({ credentials: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/", userRoutes);
-app.use("/vendor",vendorRoutes)
+app.use("/vendor", vendorRoutes)
+
+
+app.use((err, req, res, next) => {
+  const errorStatus = err.status || 500
+
+  const errorMessage = err.message || "Something went wrong !"
+
+  return res.status(errorStatus).json({
+    success: false,
+    status: errorStatus,
+    message: errorMessage,
+    stack: err.stack
+  })
+})
 
 app.listen(process.env.PORT, () => {
   console.log("Server started", process.env.PORT);

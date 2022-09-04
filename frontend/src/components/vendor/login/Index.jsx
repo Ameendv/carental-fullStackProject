@@ -37,6 +37,7 @@ function Index() {
 
   const { vendor, isLoading, isError, isSuccess, message } = useSelector(
     (state) => {
+     
       return state.auth;
     }
   );
@@ -46,24 +47,32 @@ function Index() {
       toast.error(message)
     }
 
-    if(isSuccess || vendor){
+    if(isSuccess){
       navigate('/dashboard')
     }
 
   },[isError,isSuccess,vendor,isLoading,navigate,dispatch])
 
   const onSubmit=(e)=>{
-    const vendorData={
-      username,password
-    }
 
-    dispatch(login(vendorData))
+    if(username && password){
+      const vendorData={
+        username,password
+      }
+      dispatch(login(vendorData))
+    }else{
+      toast.error('Enter the Username and Password')
+    }
+    
+
+    
   }
 
   if(isLoading){
     return <LoadingSpinner />
   }
 
+ 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };

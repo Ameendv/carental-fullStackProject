@@ -62,7 +62,7 @@ module.exports = {
       const user = await User.findOne({ email });
 
       if (user) {
-        console.log("heyyyya");
+       
         const user = { username: email };
 
         const accessToken = generateAccessToken(user);
@@ -140,7 +140,7 @@ module.exports = {
           { email: req.body.email },
           { $push: { refreshToken } }
         );
-        console.log(response);
+        
 
         res.cookie('jwt', refreshToken, {
           httpOnly: true,
