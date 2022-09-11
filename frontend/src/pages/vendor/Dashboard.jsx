@@ -7,12 +7,15 @@ import Content from '../../components/vendor/Navbar/Content/Index'
 
 
 function Dashboard() {
+
+
   return (
+    
     <>
-     <SideNavbar >
-    <Content />
-      </ SideNavbar>
-      </>
+      <SideNavbar>
+        <Content />
+      </SideNavbar>
+    </>
   );
 }
 

@@ -30,7 +30,7 @@ function App() {
 
         </Routes>
         <Routes>
-        <Route path="/vendor-register" exact element={<Register />} />
+          <Route path="/vendor-register" exact element={<Register />} />
           <Route path="/vendor-login" exact element={<VendorLogin />} />
           <Route path="/dashboard" exact element={<Dashboard />} />
         </Routes>

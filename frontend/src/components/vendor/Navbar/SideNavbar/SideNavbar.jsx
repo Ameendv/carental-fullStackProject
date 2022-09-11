@@ -15,9 +15,7 @@ import Header from "../Header/Index";
 function SideNavbar({children}) {
 
 
-  const showVehicles=()=>{
-    console.log('lkasdjfh')
-  }
+ 
 
   let location =  useLocation()
   let active = location.pathname
@@ -29,13 +27,13 @@ function SideNavbar({children}) {
   const navigate =useNavigate()
 
 const handleLogout =async()=>{
-  //   localStorage.removeItem('Admin')
-  //   await axios.get(`${serverUrl}/admin/logout`,{withCredentials:true}).then((res)=>{
-  //      navigate('/admin/login')
-  //   })
-  //   .catch((err)=>{
-  //     console.log(err);
-  //   })
+    localStorage.removeItem('vendor')
+    // await axios.get(`${serverUrl}/admin/logout`,{withCredentials:true}).then((res)=>{
+    //    navigate('/admin/login')
+    // })
+    // .catch((err)=>{
+    //   console.log(err);
+    // })
 }
 
 

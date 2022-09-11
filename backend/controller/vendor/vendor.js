@@ -31,10 +31,10 @@ module.exports={
 
 
                 }else{
-                    res.status(400).json()
+                    next(createError(404,'Invalid password'))
                 }
             }else{
-                next(createError(400,'User not found'));
+                next(createError(404,'User not found'));
             }
         }catch(error){
             console.log(error)

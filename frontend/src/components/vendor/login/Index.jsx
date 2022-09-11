@@ -45,13 +45,15 @@ function Index() {
   useEffect(()=>{
     if(isError){
       toast.error(message)
+      dispatch(reset())
     }
 
     if(isSuccess){
       navigate('/dashboard')
     }
 
-  },[isError,isSuccess,vendor,isLoading,navigate,dispatch])
+  },[isError,isSuccess,vendor,isLoading,navigate,dispatch,message])
+
 
   const onSubmit=(e)=>{
 
@@ -121,6 +123,7 @@ function Index() {
               sx={{}}
               id="input-with-icon-textfield"
               label="Username"
+              value={values.username}
               onChange={handleChange("username")}
               InputProps={{
                 startAdornment: (
