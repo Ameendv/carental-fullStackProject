@@ -16,14 +16,18 @@ module.exports={
                 const accessToken=generateAccessToken(vendorData)
                 
                 const refreshToken=jwt.sign(vendorData,process.env.REFRESH_TOKEN_SECRET)
-                console.log(refreshToken)
+                
 
                 await vendor.updateOne({username:vendorData.vendorName},{$push:{refreshToken}}).then((data)=>{
 
-                    res.cookie('jwt',refreshToken,{
+                    res.cookie('refresh',refreshToken,{
                         httpOnly:true,
                         maxAge:60000
                     })
+                    res.cookie('access',accessToken,{
+                        httpOnly:true,
+                        
+                    })  
                     res.status(200)
                     res.json({accessToken})
 
@@ -39,9 +43,13 @@ module.exports={
         }catch(error){
             console.log(error)
         }
+    },
+    vendorLogout:(req,res)=>{
+       console.log(req.cookies)
     }
 }
 
 function generateAccessToken(user) {
+    
     return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {algorithm:'HS256', expiresIn: "10m" });
   }

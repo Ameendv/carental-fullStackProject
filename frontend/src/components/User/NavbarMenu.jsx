@@ -39,7 +39,18 @@ function NavbarMenu() {
         </Typography>
        
       </MenuItem>
-    </div>
+
+      <MenuItem  onClick={handleCloseUserMenu}>
+        <Typography
+          textAlign="center"
+          onClick={() => {
+            navigate('/vendor-login')
+          }}
+        >
+          Login as Vendor
+        </Typography>
+       
+      </MenuItem>    </div>
   );
 }
 

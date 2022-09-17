@@ -4,6 +4,8 @@ import {Link,useLocation,useNavigate} from 'react-router-dom'
 import './SideNavbar.css'
 import { ProSidebar, SidebarHeader, SidebarFooter, SidebarContent } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
+import {SERVER_URL} from '../../../../constants/api'
+import axios from 'axios'
 
 import Header from "../Header/Index";
 
@@ -28,12 +30,12 @@ function SideNavbar({children}) {
 
 const handleLogout =async()=>{
     localStorage.removeItem('vendor')
-    // await axios.get(`${serverUrl}/admin/logout`,{withCredentials:true}).then((res)=>{
-    //    navigate('/admin/login')
-    // })
-    // .catch((err)=>{
-    //   console.log(err);
-    // })
+    await axios.get(`${SERVER_URL}/vendor/api/logout`,{withCredentials:true}).then((res)=>{
+       console.log(res)
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
 }
 
 

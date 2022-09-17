@@ -17,7 +17,7 @@ mongoose
     }
   });
 
-app.use(cors({ credentials: true }));
+app.use(cors({credentials: true,origin:true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
