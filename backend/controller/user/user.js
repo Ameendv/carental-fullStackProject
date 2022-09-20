@@ -15,7 +15,7 @@ const User = require("../../models/userModel");
 
 clientTwilio.verify.v2.services
   .create({ friendlyName: "Carental" })
-  .then((service) => console.log(service.sid));
+  .then((service) => {});
 
 module.exports = {
   userSignup: async (req, res) => {

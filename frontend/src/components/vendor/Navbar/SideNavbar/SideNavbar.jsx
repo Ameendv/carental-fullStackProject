@@ -73,9 +73,9 @@ const handleLogout =async()=>{
                 <i className="fas fa-tachometer nav-link-icon"></i>
                 <span className="nav-link-name">Dashboard</span>
               </Link>
-              <Link to="/admin/users" className={`nav-link   ${active == '/admin/users' ? 'active':null}`}>
+              <Link to="/add-car" className={`nav-link   ${active == '/add-car' ? 'active':null}`}>
                 <i className="fas fa-hotel nav-link-icon"></i>
-                <span className="nav-link-name">Users</span>
+                <span className="nav-link-name">Add vehicles</span>
               </Link>
               <Link to="/gallery" className="nav-link">
                 <i className="fas fa-image nav-link-icon"></i>

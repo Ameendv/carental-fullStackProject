@@ -170,7 +170,7 @@ function DefaultLayout(props) {
         </Container>
       </AppBar>
 
-      <div className="content1">{props.children}</div>
+      <div className="content1" >{props.children}</div>
     </div>
   );
 }

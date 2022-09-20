@@ -1,4 +1,5 @@
 import React,{useState} from "react";
+import Chat from './ChatWindow'
 
 
 
@@ -156,6 +157,12 @@ export default function FullWidthGrid() {
         
         <Button xs={11} variant="contained"  sx={{backgroundColor:'#D61C4E',borderRadius:'0px 5px 5px 0px',height:'3.49rem' ,fontWeight:"bold"}}>Search</Button>
         </form>
+        </Grid>
+        <Grid sx={{display:'flex' , justifyContent:'flex-end'}} md={12}>
+          <Grid >
+            <Chat />
+          </Grid>
+         
         </Grid>
       </Grid>
     </Box>
