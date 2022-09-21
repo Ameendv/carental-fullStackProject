@@ -39,24 +39,40 @@ function AddProductForm() {
     const onSubmit=(e)=>{
       e.preventDefault()
 
-      const dataToBackend=new FormData()
-      console.log(images)
-      dataToBackend.append('images',images)
-      dataToBackend.append('datas',JSON.stringify(data)) 
-     
-      const config={
-        headers:{
-            'Content-Type':'mulipart/form-data'
+      const empty=()=>{
+        for(let i in data){
+          console.log(data[i])
+          if(data[i]==='' || images.length==0){
+            return true
+          }
+
         }
-    }
+      }
+
+      if(empty()){
+        toast.error('Enter all datas of the car')
+      }else{
+        const dataToBackend=new FormData()
       
+        dataToBackend.append('images',images)  
+        dataToBackend.append('datas',JSON.stringify(data)) 
        
-       axios.post(`${SERVER_URL}/vendor/api/add-car`,dataToBackend,config).then((response)=>{
-        toast.success('Car added succesfully')
-       
-       }).catch((error)=>{
-        toast.error('Something went wrong')
-       })
+        const config={
+          headers:{
+              'Content-Type':'mulipart/form-data'
+          }
+      }
+        
+         
+         axios.post(`${SERVER_URL}/vendor/api/add-car`,dataToBackend,config).then((response)=>{
+          toast.success('Car added succesfully')
+         
+         }).catch((error)=>{
+          toast.error('Something went wrong')
+         })
+      }
+
+    
     }
     
   return (
