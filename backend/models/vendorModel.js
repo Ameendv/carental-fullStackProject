@@ -11,6 +11,7 @@ const vendor = new mongoose.Schema(
     location: { type: Object},
     bookings: { type: Array },
     isBlocked: { type: Boolean, default: false },
+    vehicles:{type:Array},
    
     refreshToken: { type: Array },
     

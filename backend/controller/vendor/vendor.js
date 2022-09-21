@@ -4,6 +4,9 @@ const vendor=require('../../models/vendorModel')
 const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
 const {createError}=require('../../errorHandling/createError')
+const {ObjectId}=require('mongodb')
+const fs = require('fs');
+const path = require('path')
 
 
 module.exports={
@@ -46,6 +49,26 @@ module.exports={
     },
     vendorLogout:(req,res)=>{
        console.log(req.cookies)
+    },
+    addCar: async (req, res) => {
+        const carData = JSON.parse(req.body.datas)
+        carData.id = new ObjectId()
+
+        await vendor.updateOne({ username: 'cali-beach' }, { $push: { vehicles: carData } }).then((response) => {
+            const currentLocation = path.join(__dirname, '../../public', 'vehicleTempName.jpg')
+            const destinationLocation = path.join(__dirname, '../../public/vehicles', carData.id + '.jpg')
+
+            fs.rename(currentLocation, destinationLocation, (err) => {
+                if (err) {
+                    res.sendStatus(400)
+                } else {
+                    res.status(200).json({message:'Vehicle added successfully'})
+                }
+            })
+
+        }).catch((error) => {
+            console.log(error)
+        })
     }
 }
 
